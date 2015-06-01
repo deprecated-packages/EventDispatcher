@@ -1,0 +1,26 @@
+<?php
+
+namespace Symnedi\EventDispatcher\Tests\DI\EventDispatcherExtensionSource;
+
+use Exception;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+
+
+class SomeEventSubscriber implements EventSubscriberInterface
+{
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public static function getSubscribedEvents()
+	{
+		return ['subscriber.event' => 'methodName'];
+	}
+
+
+	public function methodName()
+	{
+		throw new Exception('Event was dispatched in subscriber.');
+	}
+
+}

@@ -1,0 +1,5 @@
+services:
+	- Symnedi\EventDispatcher\Tests\DI\EventDispatcherExtensionSource\SomeEventSubscriber
+
+extensions:
+	- Symnedi\EventDispatcher\DI\EventDispatcherExtension

@@ -1,0 +1,27 @@
+{
+	"name": "symnedi/event-dispatcher",
+	"description": "Symfony\\EventDispatcher integration to Nette.",
+	"keywords": ["nette", "symfony", "event", "event-dispatcher"],
+	"license": "MIT",
+	"authors": [
+		{ "name": "Tomáš Votruba", "homepage": "http://tomasvotruba.cz", "email": "tomas.vot@gmail.com" }
+	],
+	"require": {
+		"php": ">=5.5",
+		"nette/di": "~2.3",
+		"symfony/event-dispatcher": "^2.7"
+	},
+	"require-dev": {
+		"nette/bootstrap": "~2.3"
+	},
+	"autoload": {
+		"psr-4": {
+			"Symnedi\\EventDispatcher\\": "src"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Symnedi\\EventDispatcher\\Tests\\": "tests"
+		}
+	}
+}

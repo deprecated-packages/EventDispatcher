@@ -1,5 +1,6 @@
 services:
 	- Symnedi\EventDispatcher\Tests\DI\EventDispatcherExtensionSource\SomeEventSubscriber
+	- Symnedi\EventDispatcher\Tests\NetteEvent\NetteEventDispatchSource\NetteEventSubscriber
 
 extensions:
 	- Symnedi\EventDispatcher\DI\EventDispatcherExtension

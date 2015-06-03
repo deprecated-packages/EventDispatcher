@@ -1,6 +1,15 @@
 services:
+	- Symnedi\EventDispatcher\Tests\NetteEvent\EventStateStorage
+
+	# event subscribers
 	- Symnedi\EventDispatcher\Tests\DI\EventDispatcherExtensionSource\SomeEventSubscriber
-	- Symnedi\EventDispatcher\Tests\NetteEvent\NetteEventDispatchSource\NetteEventSubscriber
+	- Symnedi\EventDispatcher\Tests\NetteEvent\EventSubscriber\OnRequestSubscriber
+	- Symnedi\EventDispatcher\Tests\NetteEvent\EventSubscriber\OnStartupSubscriber
+
+	# routing logic
+	- Symnedi\EventDispatcher\Tests\NetteEvent\DispatchSource\RouterFactory
+	router: [@Symnedi\EventDispatcher\Tests\NetteEvent\DispatchSource\RouterFactory, create]
+	- HomepagePresenter
 
 extensions:
 	- Symnedi\EventDispatcher\DI\EventDispatcherExtension

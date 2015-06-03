@@ -10,7 +10,7 @@ use Symnedi\EventDispatcher\Nette\ApplicationEvents;
 use Symnedi\EventDispatcher\Tests\ContainerFactory;
 
 
-class NetteEventDispatchTest extends PHPUnit_Framework_TestCase
+class DispatchTest extends PHPUnit_Framework_TestCase
 {
 
 	/**
@@ -23,34 +23,35 @@ class NetteEventDispatchTest extends PHPUnit_Framework_TestCase
 	 */
 	private $application;
 
+	/**
+	 * @var EventStateStorage
+	 */
+	private $eventStateStorage;
+
 
 	protected function setUp()
 	{
 		$containerFactory = (new ContainerFactory)->create();
 		$this->eventDispatcher = $containerFactory->getByType(EventDispatcherInterface::class);
 		$this->application = $containerFactory->getByType(Application::class);
+		$this->eventStateStorage = $containerFactory->getByType(EventStateStorage::class);
 	}
 
 
 	public function testGetListeners()
 	{
-		$this->assertCount(2, $this->eventDispatcher->getListeners());
+		$this->assertCount(3, $this->eventDispatcher->getListeners());
 		$this->assertCount(1, $this->eventDispatcher->getListeners('subscriber.event'));
 		$this->assertCount(1, $this->eventDispatcher->getListeners(ApplicationEvents::ON_APPLICATION_REQUEST));
+		$this->assertCount(1, $this->eventDispatcher->getListeners(ApplicationEvents::ON_STARTUP));
 	}
 
 
-	public function testDispatch()
+	public function testDispatchAllEvents()
 	{
-		$this->setExpectedException(Exception::class);
-		$this->eventDispatcher->dispatch(ApplicationEvents::ON_APPLICATION_REQUEST);
-	}
-
-
-	public function testApplicationRun()
-	{
-		$this->setExpectedException(Exception::class);
 		$this->application->run();
+		$this->assertSame('OK', $this->eventStateStorage->getEventState(ApplicationEvents::ON_STARTUP));
+		$this->assertSame('OK', $this->eventStateStorage->getEventState(ApplicationEvents::ON_APPLICATION_REQUEST));
 	}
 
 }

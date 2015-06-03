@@ -17,6 +17,11 @@ class ApplicationEvents
 	/**
 	 * @var string
 	 */
+	const ON_STARTUP = 'Nette\Application\Application::onStartup';
+
+	/**
+	 * @var string
+	 */
 	const ON_APPLICATION_REQUEST = 'Nette\Application\Application::onRequest';
 
 	/**

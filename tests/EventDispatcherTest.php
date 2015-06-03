@@ -1,18 +1,8 @@
 <?php
 
-/**
- * This file is part of EventDispatcher
- *
- * Copyright (c) 2014 Pears Health Cyber, s.r.o. (http://pearshealthcyber.cz)
- *
- * For the full copyright and license information, please view
- * the file license.md that was distributed with this source code.
- */
-
 namespace Symnedi\EventDispatcher\Tests;
 
 use Exception;
-use Nette\DI\Container;
 use PHPUnit_Framework_TestCase;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 

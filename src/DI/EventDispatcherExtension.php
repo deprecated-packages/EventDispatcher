@@ -14,6 +14,7 @@ use Nette\DI\ContainerBuilder;
 use Nette\DI\Statement;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symnedi\EventDispatcher\Event\ApplicationEvent;
 use Symnedi\EventDispatcher\Event\ApplicationRequestEvent;
 use Symnedi\EventDispatcher\Nette\ApplicationEvents;
 
@@ -84,11 +85,16 @@ class EventDispatcherExtension extends CompilerExtension
 				'class' => Application::class,
 				'property' => 'onRequest',
 				'eventClass' => ApplicationRequestEvent::class,
-				'eventName' => ApplicationEvents::ON_APPLICATION_REQUEST
+				'eventName' => ApplicationEvents::ON_APPLICATION_REQUEST,
+			],
+			ApplicationEvents::ON_STARTUP => [
+				'class' => Application::class,
+				'property' => 'onStartup',
+				'eventClass' => ApplicationEvent::class,
+				'eventName' => ApplicationEvents::ON_STARTUP,
 			]
 			// todo: complete
 		];
-
 
 		foreach ($netteEvents as $netteEvent) {
 			if ( ! $definitionName = $containerBuilder->getByType($netteEvent['class'])) {
@@ -99,9 +105,9 @@ class EventDispatcherExtension extends CompilerExtension
 			$serviceDefinition->addSetup('$service->?[] = ?;', [
 				$netteEvent['property'],
 				new Statement('
-				function ($app, $presenter) {
+				function () {
 					$class = ?;
-			        $event = new $class($app, $presenter);
+			        $event = new $class(...func_get_args());
 			        ?->dispatch(?, $event);
 			    }', [
 						$netteEvent['eventClass'],

@@ -42,9 +42,18 @@ class DispatchTest extends PHPUnit_Framework_TestCase
 	public function testDispatchApplicationEvents()
 	{
 		$this->application->run();
-		$this->assertSame('OK', $this->eventStateStorage->getEventState(ApplicationEvents::ON_APPLICATION_REQUEST));
+		$this->assertSame('OK', $this->eventStateStorage->getEventState(ApplicationEvents::ON_REQUEST));
 		$this->assertSame('OK', $this->eventStateStorage->getEventState(ApplicationEvents::ON_STARTUP));
 		$this->assertSame('OK', $this->eventStateStorage->getEventState(ApplicationEvents::ON_PRESENTER));
+		$this->assertSame('OK', $this->eventStateStorage->getEventState(ApplicationEvents::ON_SHUTDOWN));
+	}
+
+
+	public function testDispatchApplicationEventsWithError()
+	{
+		$this->application->run();
+//		$this->assertSame('OK', $this->eventStateStorage->getEventState(ApplicationEvents::ON_RESPONSE));
+//		$this->assertSame('OK', $this->eventStateStorage->getEventState(ApplicationEvents::ON_ERROR));
 	}
 
 

@@ -28,16 +28,19 @@ class ApplicationSubscriber implements EventSubscriberInterface
 	public static function getSubscribedEvents()
 	{
 		return [
-			ApplicationEvents::ON_APPLICATION_REQUEST => 'onRequest',
+			ApplicationEvents::ON_REQUEST => 'onRequest',
 			ApplicationEvents::ON_STARTUP => 'onStartup',
-			ApplicationEvents::ON_PRESENTER => 'onPresenter'
+			ApplicationEvents::ON_PRESENTER => 'onPresenter',
+			ApplicationEvents::ON_SHUTDOWN => 'onShutdown',
+			ApplicationEvents::ON_RESPONSE => 'onResponse',
+			ApplicationEvents::ON_ERROR => 'onError'
 		];
 	}
 
 
 	public function onRequest()
 	{
-		$this->eventStateStorage->addEventState(ApplicationEvents::ON_APPLICATION_REQUEST, 'OK');
+		$this->eventStateStorage->addEventState(ApplicationEvents::ON_REQUEST, 'OK');
 	}
 
 
@@ -50,6 +53,24 @@ class ApplicationSubscriber implements EventSubscriberInterface
 	public function onPresenter()
 	{
 		$this->eventStateStorage->addEventState(ApplicationEvents::ON_PRESENTER, 'OK');
+	}
+
+
+	public function onShutdown()
+	{
+		$this->eventStateStorage->addEventState(ApplicationEvents::ON_SHUTDOWN, 'OK');
+	}
+
+
+	public function onError()
+	{
+		$this->eventStateStorage->addEventState(ApplicationEvents::ON_ERROR, 'OK');
+	}
+
+
+	public function onResponse()
+	{
+		$this->eventStateStorage->addEventState(ApplicationEvents::ON_RESPONSE, 'OK');
 	}
 
 }

@@ -22,11 +22,26 @@ class ApplicationEvents
 	/**
 	 * @var string
 	 */
-	const ON_APPLICATION_REQUEST = 'Nette\Application\Application::onRequest';
+	const ON_SHUTDOWN = 'Nette\Application\Application::onShutdown';
+
+	/**
+	 * @var string
+	 */
+	const ON_REQUEST = 'Nette\Application\Application::onRequest';
 
 	/**
 	 * @var string
 	 */
 	const ON_PRESENTER = 'Nette\Application\Application::onPresenter';
+
+	/**
+	 * @var string
+	 */
+	const ON_RESPONSE = 'Nette\Application\Application::onResponse';
+
+	/**
+	 * @var string
+	 */
+	const ON_ERROR = 'Nette\Application\Application::onResponse';
 
 }

@@ -3,8 +3,7 @@
 namespace Symnedi\EventDispatcher\Tests\NetteEvent\EventSubscriber;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symnedi\EventDispatcher\Nette\ApplicationEvents;
-use Symnedi\EventDispatcher\Nette\PresenterEvents;
+use Symnedi\EventDispatcher\NettePresenterEvents;
 use Symnedi\EventDispatcher\Tests\NetteEvent\EventStateStorage;
 
 
@@ -29,14 +28,14 @@ class PresenterSubscriber implements EventSubscriberInterface
 	public static function getSubscribedEvents()
 	{
 		return [
-			PresenterEvents::ON_SHUTDOWN => 'onShutdown'
+			NettePresenterEvents::ON_SHUTDOWN => 'onShutdown'
 		];
 	}
 
 
 	public function onShutdown()
 	{
-		$this->eventStateStorage->addEventState(PresenterEvents::ON_SHUTDOWN, 'OK');
+		$this->eventStateStorage->addEventState(NettePresenterEvents::ON_SHUTDOWN, 'OK');
 	}
 
 }

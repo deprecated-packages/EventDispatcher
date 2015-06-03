@@ -5,13 +5,13 @@
  * Copyright (c) 2014 Tomas Votruba (http://tomasvotruba.cz)
  */
 
-namespace Symnedi\EventDispatcher\Nette;
+namespace Symnedi\EventDispatcher;
 
 
 /**
  * Events in Nette Presenter life cycle.
  */
-class PresenterEvents
+class NettePresenterEvents
 {
 
 	/**

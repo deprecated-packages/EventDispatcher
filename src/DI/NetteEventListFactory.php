@@ -15,8 +15,8 @@ use Symnedi\EventDispatcher\Event\ApplicationPresenterEvent;
 use Symnedi\EventDispatcher\Event\ApplicationRequestEvent;
 use Symnedi\EventDispatcher\Event\ApplicationResponseEvent;
 use Symnedi\EventDispatcher\Event\PresenterResponseEvent;
-use Symnedi\EventDispatcher\Nette\ApplicationEvents;
-use Symnedi\EventDispatcher\Nette\PresenterEvents;
+use Symnedi\EventDispatcher\NetteApplicationEvents;
+use Symnedi\EventDispatcher\NettePresenterEvents;
 
 
 class NetteEventListFactory
@@ -41,22 +41,22 @@ class NetteEventListFactory
 	private function addApplicationEventItems($list)
 	{
 		$list[] = new NetteEventItem(
-			Application::class, 'onRequest', ApplicationRequestEvent::class, ApplicationEvents::ON_REQUEST
+			Application::class, 'onRequest', ApplicationRequestEvent::class, NetteApplicationEvents::ON_REQUEST
 		);
 		$list[] = new NetteEventItem(
-			Application::class, 'onStartup', ApplicationEvent::class, ApplicationEvents::ON_STARTUP
+			Application::class, 'onStartup', ApplicationEvent::class, NetteApplicationEvents::ON_STARTUP
 		);
 		$list[] = new NetteEventItem(
-			Application::class, 'onPresenter', ApplicationPresenterEvent::class, ApplicationEvents::ON_PRESENTER
+			Application::class, 'onPresenter', ApplicationPresenterEvent::class, NetteApplicationEvents::ON_PRESENTER
 		);
 		$list[] = new NetteEventItem(
-			Application::class, 'onResponse', ApplicationResponseEvent::class, ApplicationEvents::ON_RESPONSE
+			Application::class, 'onResponse', ApplicationResponseEvent::class, NetteApplicationEvents::ON_RESPONSE
 		);
 		$list[] = new NetteEventItem(
-			Application::class, 'onError', ApplicationExceptionEvent::class, ApplicationEvents::ON_ERROR
+			Application::class, 'onError', ApplicationExceptionEvent::class, NetteApplicationEvents::ON_ERROR
 		);
 		$list[] = new NetteEventItem(
-			Application::class, 'onShutdown', ApplicationExceptionEvent::class, ApplicationEvents::ON_SHUTDOWN
+			Application::class, 'onShutdown', ApplicationExceptionEvent::class, NetteApplicationEvents::ON_SHUTDOWN
 		);
 		return $list;
 	}
@@ -69,7 +69,7 @@ class NetteEventListFactory
 	private function addPresenterEventItems($list)
 	{
 		$list[] = new NetteEventItem(
-			Presenter::class, 'onShutdown', PresenterResponseEvent::class, PresenterEvents::ON_SHUTDOWN
+			Presenter::class, 'onShutdown', PresenterResponseEvent::class, NettePresenterEvents::ON_SHUTDOWN
 		);
 		return $list;
 	}

@@ -2,12 +2,12 @@
 
 namespace Symnedi\EventDispatcher\Tests\NetteEvent;
 
-use Exception;
+use Doctrine\Instantiator\Exception\InvalidArgumentException;
 use Nette\Application\Application;
 use PHPUnit_Framework_TestCase;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symnedi\EventDispatcher\Nette\ApplicationEvents;
-use Symnedi\EventDispatcher\Nette\PresenterEvents;
+use Symnedi\EventDispatcher\NetteApplicationEvents;
+use Symnedi\EventDispatcher\NettePresenterEvents;
 use Symnedi\EventDispatcher\Tests\ContainerFactory;
 
 
@@ -39,28 +39,28 @@ class DispatchTest extends PHPUnit_Framework_TestCase
 	}
 
 
-	public function testDispatchApplicationEvents()
+	public function testDispatchNetteApplicationEvents()
 	{
 		$this->application->run();
-		$this->assertSame('OK', $this->eventStateStorage->getEventState(ApplicationEvents::ON_REQUEST));
-		$this->assertSame('OK', $this->eventStateStorage->getEventState(ApplicationEvents::ON_STARTUP));
-		$this->assertSame('OK', $this->eventStateStorage->getEventState(ApplicationEvents::ON_PRESENTER));
-		$this->assertSame('OK', $this->eventStateStorage->getEventState(ApplicationEvents::ON_SHUTDOWN));
+		$this->assertSame('OK', $this->eventStateStorage->getEventState(NetteApplicationEvents::ON_REQUEST));
+		$this->assertSame('OK', $this->eventStateStorage->getEventState(NetteApplicationEvents::ON_STARTUP));
+		$this->assertSame('OK', $this->eventStateStorage->getEventState(NetteApplicationEvents::ON_PRESENTER));
+		$this->assertSame('OK', $this->eventStateStorage->getEventState(NetteApplicationEvents::ON_SHUTDOWN));
 	}
 
 
-	public function testDispatchApplicationEventsWithError()
+	public function testDispatchNetteApplicationEventsWithError()
 	{
 		$this->application->run();
-//		$this->assertSame('OK', $this->eventStateStorage->getEventState(ApplicationEvents::ON_RESPONSE));
-//		$this->assertSame('OK', $this->eventStateStorage->getEventState(ApplicationEvents::ON_ERROR));
+//		$this->assertSame('OK', $this->eventStateStorage->getEventState(NetteApplicationEvents::ON_RESPONSE));
+//		$this->assertSame('OK', $this->eventStateStorage->getEventState(NetteApplicationEvents::ON_ERROR));
 	}
 
 
-	public function testDispatchPresenterEvents()
+	public function testDispatchNettePresenterEvents()
 	{
 		$this->application->run();
-		$this->assertSame('OK', $this->eventStateStorage->getEventState(PresenterEvents::ON_SHUTDOWN));
+		$this->assertSame('OK', $this->eventStateStorage->getEventState(NettePresenterEvents::ON_SHUTDOWN));
 	}
 
 }

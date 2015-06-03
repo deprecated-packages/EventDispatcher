@@ -16,7 +16,9 @@
 		"nette/bootstrap": "~2.3",
 		"nette/application": "^2.3",
 		"nette/robot-loader": "^2.3",
-		"tracy/tracy": "^2.3"
+		"tracy/tracy": "^2.3",
+		"mockery/mockery": "^0.9.4",
+		"latte/latte": "^2.3"
 	},
 	"autoload": {
 		"psr-4": {
@@ -28,7 +30,8 @@
 			"Symnedi\\EventDispatcher\\Tests\\": "tests"
 		},
 		"classmap": [
-			"tests/NetteEvent/DispatchSource/HomepagePresenter.php"
+			"tests/NetteEvent/DispatchSource/HomepagePresenter.php",
+			"tests/NetteEvent/DispatchSource/ResponsePresenter.php"
 		]
 	}
 }

@@ -10,6 +10,7 @@ services:
 	- Symnedi\EventDispatcher\Tests\NetteEvent\DispatchSource\RouterFactory
 	router: [@Symnedi\EventDispatcher\Tests\NetteEvent\DispatchSource\RouterFactory, create]
 	- HomepagePresenter
+	- ResponsePresenter
 
 extensions:
 	- Symnedi\EventDispatcher\DI\EventDispatcherExtension

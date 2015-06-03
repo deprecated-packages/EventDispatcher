@@ -13,7 +13,7 @@ use Nette\Application\Application;
 /**
  * Events in Nette Application life cycle.
  */
-class NetteApplicationEvents
+final class NetteApplicationEvents
 {
 
 	/**

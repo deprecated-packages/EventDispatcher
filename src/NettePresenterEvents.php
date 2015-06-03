@@ -13,7 +13,7 @@ use Nette\Application\UI\Presenter;
 /**
  * Events in Nette Presenter life cycle.
  */
-class NettePresenterEvents
+final class NettePresenterEvents
 {
 
 	/**

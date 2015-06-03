@@ -3,7 +3,10 @@
 namespace Symnedi\EventDispatcher\Tests\NetteEvent;
 
 use Nette\Application\Application;
+use Nette\Application\IResponse;
+use Nette\Application\UI\Presenter;
 use PHPUnit_Framework_TestCase;
+use Symnedi\EventDispatcher\Event\PresenterResponseEvent;
 use Symnedi\EventDispatcher\NettePresenterEvents;
 use Symnedi\EventDispatcher\Tests\ContainerFactory;
 
@@ -33,7 +36,11 @@ class DispatchPresenterTest extends PHPUnit_Framework_TestCase
 	public function testDispatch()
 	{
 		$this->application->run();
-		$this->assertSame('OK', $this->eventStateStorage->getEventState(NettePresenterEvents::ON_SHUTDOWN));
+
+		/** @var PresenterResponseEvent $presenterResponseEvent */
+		$presenterResponseEvent = $this->eventStateStorage->getEventState(NettePresenterEvents::ON_SHUTDOWN);
+		$this->assertInstanceOf(Presenter::class, $presenterResponseEvent->getPresenter());
+		$this->assertNull($presenterResponseEvent->getResponse());
 	}
 
 }

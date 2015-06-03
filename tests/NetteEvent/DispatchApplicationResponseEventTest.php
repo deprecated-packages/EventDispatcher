@@ -4,13 +4,15 @@ namespace Symnedi\EventDispatcher\Tests\NetteEvent;
 
 use Mockery;
 use Nette\Application\Application;
+use Nette\Application\IResponse;
 use Nette\Application\Request;
 use PHPUnit_Framework_TestCase;
+use Symnedi\EventDispatcher\Event\ApplicationResponseEvent;
 use Symnedi\EventDispatcher\NetteApplicationEvents;
 use Symnedi\EventDispatcher\Tests\ContainerFactory;
 
 
-class DispatchApplicationEventResponseTest extends PHPUnit_Framework_TestCase
+class DispatchApplicationResponseEventTest extends PHPUnit_Framework_TestCase
 {
 
 	/**
@@ -44,7 +46,10 @@ class DispatchApplicationEventResponseTest extends PHPUnit_Framework_TestCase
 		]);
 		$this->application->processRequest($requestMock);
 
-		$this->assertSame('OK', $this->eventStateStorage->getEventState(NetteApplicationEvents::ON_RESPONSE));
+		/** @var ApplicationResponseEvent $applicationResponseEvent */
+		$applicationResponseEvent = $this->eventStateStorage->getEventState(NetteApplicationEvents::ON_RESPONSE);
+		$this->assertInstanceOf(Application::class, $applicationResponseEvent->getApplication());
+		$this->assertInstanceOf(IResponse::class, $applicationResponseEvent->getResponse());
 	}
 
 }

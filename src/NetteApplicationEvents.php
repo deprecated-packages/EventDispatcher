@@ -1,0 +1,73 @@
+<?php
+
+/**
+ * This file is part of Symnedi.
+ * Copyright (c) 2014 Tomas Votruba (http://tomasvotruba.cz)
+ */
+
+namespace Symnedi\EventDispatcher;
+
+use Nette\Application\Application;
+
+
+/**
+ * Events in Nette Application life cycle.
+ */
+class NetteApplicationEvents
+{
+
+	/**
+	 * The ON_STARTUP event occurs before the application loads presenter, @see Application::$onStartup.
+	 *
+	 * The event listener method receives a @see Symnedi\EventDispatcher\Event\ApplicationEvent instance.
+	 *
+	 * @var string
+	 */
+	const ON_STARTUP = Application::class . '::onStartup';
+
+	/**
+	 * The ON_SHUTDOWN event occurs before the application shuts down, @see Application::$onShutdown.
+	 *
+	 * The event listener method receives a @see Symnedi\EventDispatcher\Event\ApplicationExceptionEvent instance.
+	 *
+	 * @var string
+	 */
+	const ON_SHUTDOWN = Application::class . '::onShutdown';
+
+	/**
+	 * The ON_REQUEST event occurs when a new request is received, @see Application::$onRequest.
+	 *
+	 * The event listener method receives a @see Symnedi\EventDispatcher\Event\ApplicationRequestEvent instance.
+	 *
+	 * @var string
+	 */
+	const ON_REQUEST = Application::class . '::onRequest';
+
+	/**
+	 * The ON_PRESENTER event when a presenter is created, @see Application::$onPresenter.
+	 *
+	 * The event listener method receives a @see Symnedi\EventDispatcher\Event\ApplicationPresenterEvent instance.
+	 *
+	 * @var string
+	 */
+	const ON_PRESENTER = Application::class . '::onPresenter';
+
+	/**
+	 * The ON_RESPONSE event occurs when a new response is ready for dispatch, @see Application::$onResponse.
+	 *
+	 * The event listener method receives a @see Symnedi\EventDispatcher\Event\ApplicationExceptionEvent instance.
+	 *
+	 * @var string
+	 */
+	const ON_RESPONSE = Application::class . '::onResponse';
+
+	/**
+	 * The ON_ERROR event when an unhandled exception occurs in the application, @see Application::$onError.
+	 *
+ 	 * The event listener method receives a @see Symnedi\EventDispatcher\Event\ApplicationExceptionEvent instance.
+	 *
+	 * @var string
+	 */
+	const ON_ERROR = Application::class . '::onError';
+
+}

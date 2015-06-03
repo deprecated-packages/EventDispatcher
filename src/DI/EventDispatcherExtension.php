@@ -8,15 +8,11 @@
 namespace Symnedi\EventDispatcher\DI;
 
 use Closure;
-use Nette\Application\Application;
 use Nette\DI\CompilerExtension;
 use Nette\DI\ContainerBuilder;
 use Nette\DI\Statement;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symnedi\EventDispatcher\Event\ApplicationEvent;
-use Symnedi\EventDispatcher\Event\ApplicationRequestEvent;
-use Symnedi\EventDispatcher\Nette\ApplicationEvents;
 
 
 class EventDispatcherExtension extends CompilerExtension
@@ -43,8 +39,38 @@ class EventDispatcherExtension extends CompilerExtension
 			$eventDispatcher->addSetup('addSubscriber', ['@' . $eventSubscriberDefinition->getClass()]);
 		}
 
-		$this->removeKdybySymfonyProxy();
 		$this->bindNetteEvents();
+		$this->removeKdybySymfonyProxy();
+	}
+
+
+	private function bindNetteEvents()
+	{
+		$containerBuilder = $this->getContainerBuilder();
+
+		$netteEventList = (new NetteEventListFactory)->create();
+		foreach ($netteEventList as $netteEvent) {
+			if ( ! $serviceDefinitions = $containerBuilder->findByType($netteEvent->getClass())) {
+				return;
+			}
+
+			foreach ($serviceDefinitions as $serviceDefinition) {
+				$serviceDefinition->addSetup('$service->?[] = ?;', [
+					$netteEvent->getProperty(),
+					new Statement('
+					function () {
+						$class = ?;
+						$event = new $class(...func_get_args());
+						?->dispatch(?, $event);
+					}', [
+							$netteEvent->getEventClass(),
+							'@' . EventDispatcherInterface::class,
+							$netteEvent->getEventName()
+						]
+					)
+				]);
+			}
+		}
 	}
 
 
@@ -72,35 +98,6 @@ class EventDispatcherExtension extends CompilerExtension
 
 				$containerBuilder->removeDefinition($name);
 			}
-		}
-	}
-
-
-	private function bindNetteEvents()
-	{
-		$containerBuilder = $this->getContainerBuilder();
-
-		$netteEventList = (new NetteEventListFactory)->create();
-		foreach ($netteEventList as $netteEvent) {
-			if ( ! $definitionName = $containerBuilder->getByType($netteEvent->getClass())) {
-				return;
-			}
-
-			$serviceDefinition = $containerBuilder->getDefinition($definitionName);
-			$serviceDefinition->addSetup('$service->?[] = ?;', [
-				$netteEvent->getProperty(),
-				new Statement('
-				function () {
-					$class = ?;
-					$event = new $class(...func_get_args());
-					?->dispatch(?, $event);
-				}', [
-						$netteEvent->getEventClass(),
-						'@' . EventDispatcherInterface::class,
-						$netteEvent->getEventName()
-					]
-				)
-			]);
 		}
 	}
 

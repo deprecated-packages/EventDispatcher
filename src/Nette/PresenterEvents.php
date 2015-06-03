@@ -17,6 +17,6 @@ class PresenterEvents
 	/**
 	 * @var string
 	 */
-	const ON_PRESENTER_STARTUP = 'Nette\Application\UI\Presenter::onStartup';
+	const ON_SHUTDOWN = 'Nette\Application\UI\Presenter::onShutdown';
 
 }

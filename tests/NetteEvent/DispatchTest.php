@@ -7,6 +7,7 @@ use Nette\Application\Application;
 use PHPUnit_Framework_TestCase;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symnedi\EventDispatcher\Nette\ApplicationEvents;
+use Symnedi\EventDispatcher\Nette\PresenterEvents;
 use Symnedi\EventDispatcher\Tests\ContainerFactory;
 
 
@@ -38,20 +39,19 @@ class DispatchTest extends PHPUnit_Framework_TestCase
 	}
 
 
-	public function testGetListeners()
+	public function testDispatchApplicationEvents()
 	{
-		$this->assertCount(3, $this->eventDispatcher->getListeners());
-		$this->assertCount(1, $this->eventDispatcher->getListeners('subscriber.event'));
-		$this->assertCount(1, $this->eventDispatcher->getListeners(ApplicationEvents::ON_APPLICATION_REQUEST));
-		$this->assertCount(1, $this->eventDispatcher->getListeners(ApplicationEvents::ON_STARTUP));
+		$this->application->run();
+		$this->assertSame('OK', $this->eventStateStorage->getEventState(ApplicationEvents::ON_APPLICATION_REQUEST));
+		$this->assertSame('OK', $this->eventStateStorage->getEventState(ApplicationEvents::ON_STARTUP));
+		$this->assertSame('OK', $this->eventStateStorage->getEventState(ApplicationEvents::ON_PRESENTER));
 	}
 
 
-	public function testDispatchAllEvents()
+	public function testDispatchPresenterEvents()
 	{
 		$this->application->run();
-		$this->assertSame('OK', $this->eventStateStorage->getEventState(ApplicationEvents::ON_STARTUP));
-		$this->assertSame('OK', $this->eventStateStorage->getEventState(ApplicationEvents::ON_APPLICATION_REQUEST));
+		$this->assertSame('OK', $this->eventStateStorage->getEventState(PresenterEvents::ON_SHUTDOWN));
 	}
 
 }

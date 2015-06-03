@@ -3,8 +3,8 @@ services:
 
 	# event subscribers
 	- Symnedi\EventDispatcher\Tests\DI\EventDispatcherExtensionSource\SomeEventSubscriber
-	- Symnedi\EventDispatcher\Tests\NetteEvent\EventSubscriber\OnRequestSubscriber
-	- Symnedi\EventDispatcher\Tests\NetteEvent\EventSubscriber\OnStartupSubscriber
+	- Symnedi\EventDispatcher\Tests\NetteEvent\EventSubscriber\ApplicationSubscriber
+	- Symnedi\EventDispatcher\Tests\NetteEvent\EventSubscriber\PresenterSubscriber
 
 	# routing logic
 	- Symnedi\EventDispatcher\Tests\NetteEvent\DispatchSource\RouterFactory

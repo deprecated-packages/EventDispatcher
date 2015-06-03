@@ -80,39 +80,24 @@ class EventDispatcherExtension extends CompilerExtension
 	{
 		$containerBuilder = $this->getContainerBuilder();
 
-		$netteEvents = [
-			ApplicationEvents::ON_APPLICATION_REQUEST => [
-				'class' => Application::class,
-				'property' => 'onRequest',
-				'eventClass' => ApplicationRequestEvent::class,
-				'eventName' => ApplicationEvents::ON_APPLICATION_REQUEST,
-			],
-			ApplicationEvents::ON_STARTUP => [
-				'class' => Application::class,
-				'property' => 'onStartup',
-				'eventClass' => ApplicationEvent::class,
-				'eventName' => ApplicationEvents::ON_STARTUP,
-			]
-			// todo: complete
-		];
-
-		foreach ($netteEvents as $netteEvent) {
-			if ( ! $definitionName = $containerBuilder->getByType($netteEvent['class'])) {
+		$netteEventList = (new NetteEventListFactory)->create();
+		foreach ($netteEventList as $netteEvent) {
+			if ( ! $definitionName = $containerBuilder->getByType($netteEvent->getClass())) {
 				return;
 			}
 
 			$serviceDefinition = $containerBuilder->getDefinition($definitionName);
 			$serviceDefinition->addSetup('$service->?[] = ?;', [
-				$netteEvent['property'],
+				$netteEvent->getProperty(),
 				new Statement('
 				function () {
 					$class = ?;
-			        $event = new $class(...func_get_args());
-			        ?->dispatch(?, $event);
-			    }', [
-						$netteEvent['eventClass'],
+					$event = new $class(...func_get_args());
+					?->dispatch(?, $event);
+				}', [
+						$netteEvent->getEventClass(),
 						'@' . EventDispatcherInterface::class,
-						$netteEvent['eventName']
+						$netteEvent->getEventName()
 					]
 				)
 			]);

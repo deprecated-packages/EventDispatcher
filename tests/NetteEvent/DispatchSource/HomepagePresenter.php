@@ -12,10 +12,4 @@ class HomepagePresenter extends Presenter
 		$this->terminate();
 	}
 
-
-	public function renderResponse()
-	{
-		return new TextResponse('OK');
-	}
-
 }

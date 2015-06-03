@@ -49,14 +49,6 @@ class DispatchTest extends PHPUnit_Framework_TestCase
 	}
 
 
-	public function testDispatchNetteApplicationEventsWithError()
-	{
-		$this->application->run();
-//		$this->assertSame('OK', $this->eventStateStorage->getEventState(NetteApplicationEvents::ON_RESPONSE));
-//		$this->assertSame('OK', $this->eventStateStorage->getEventState(NetteApplicationEvents::ON_ERROR));
-	}
-
-
 	public function testDispatchNettePresenterEvents()
 	{
 		$this->application->run();

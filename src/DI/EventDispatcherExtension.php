@@ -31,6 +31,8 @@ class EventDispatcherExtension extends CompilerExtension
 		$containerBuilder = $this->getContainerBuilder();
 		$containerBuilder->prepareClassList();
 
+		$this->removeKdybySymfonyProxy();
+
 		$eventDispatcher = $containerBuilder->getDefinition(
 			$containerBuilder->getByType(EventDispatcherInterface::class)
 		);
@@ -40,7 +42,6 @@ class EventDispatcherExtension extends CompilerExtension
 		}
 
 		$this->bindNetteEvents();
-		$this->removeKdybySymfonyProxy();
 	}
 
 

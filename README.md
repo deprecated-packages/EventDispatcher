@@ -25,6 +25,8 @@ extensions:
 
 ## Usage
 
+Great intro to EventDispatcher might give you [this presentation with real-life examples](http://www.slideshare.net/DigitalPoetsSociety/symfony2-components-the-event-dispatcher.
+
 See [Symfony documentation](http://symfony.com/doc/current/components/event_dispatcher/introduction.html).
 
 

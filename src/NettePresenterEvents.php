@@ -17,7 +17,8 @@ final class NettePresenterEvents
 {
 
 	/**
-	 * The ON_SHUTDOWN event occurs when the presenter is shutting down, @see Presenter::$onShutdown.
+	 * The ON_SHUTDOWN event occurs when the presenter is shutting down,
+	 * @see Nette\Application\UI\Presenter::$onShutdown.
 	 *
 	 * The event listener method receives a @see Symnedi\EventDispatcher\Event\PresenterResponseEvent instance.
 	 *

@@ -8,6 +8,7 @@
 namespace Symnedi\EventDispatcher\Event;
 
 use Nette\Application\Application;
+use Nette\Application\IPresenter;
 use Nette\Application\UI\Presenter;
 use Symfony\Component\EventDispatcher\Event;
 
@@ -21,12 +22,12 @@ class ApplicationPresenterEvent extends Event
 	private $application;
 
 	/**
-	 * @var Presenter
+	 * @var IPresenter|Presenter
 	 */
 	private $presenter;
 
 
-	public function __construct(Application $application, Presenter $presenter)
+	public function __construct(Application $application, IPresenter $presenter)
 	{
 		$this->application = $application;
 		$this->presenter = $presenter;

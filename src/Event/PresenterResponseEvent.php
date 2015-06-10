@@ -7,6 +7,7 @@
 
 namespace Symnedi\EventDispatcher\Event;
 
+use Nette\Application\IPresenter;
 use Nette\Application\IResponse;
 use Nette\Application\UI\Presenter;
 use Symfony\Component\EventDispatcher\Event;
@@ -16,7 +17,7 @@ class PresenterResponseEvent extends Event
 {
 
 	/**
-	 * @var Presenter
+	 * @var IPresenter|Presenter
 	 */
 	private $presenter;
 
@@ -26,7 +27,7 @@ class PresenterResponseEvent extends Event
 	private $response;
 
 
-	public function __construct(Presenter $presenter, IResponse $response = NULL)
+	public function __construct(IPresenter $presenter, IResponse $response = NULL)
 	{
 		$this->presenter = $presenter;
 		$this->response = $response;

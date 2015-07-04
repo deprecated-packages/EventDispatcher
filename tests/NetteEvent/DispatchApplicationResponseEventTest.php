@@ -2,7 +2,6 @@
 
 namespace Symnedi\EventDispatcher\Tests\NetteEvent;
 
-use Mockery;
 use Nette\Application\Application;
 use Nette\Application\IResponse;
 use Nette\Application\Request;
@@ -38,13 +37,12 @@ class DispatchApplicationResponseEventTest extends PHPUnit_Framework_TestCase
 	{
 		$this->assertFalse($this->eventStateStorage->getEventState(NetteApplicationEvents::ON_RESPONSE));
 
-		$requestMock = Mockery::mock(Request::class, [
-			'getPresenterName' => 'Response',
-			'getParameters' => [],
-			'getPost' => NULL,
-			'isMethod' => TRUE
-		]);
-		$this->application->processRequest($requestMock);
+		$requestMock = $this->prophesize(Request::class);
+		$requestMock->getPresenterName()->willReturn('Response');
+		$requestMock->getParameters()->willReturn([]);
+		$requestMock->getPost('do')->willReturn(NULL);
+		$requestMock->isMethod()->willReturn(TRUE);
+		$this->application->processRequest($requestMock->reveal());
 
 		/** @var ApplicationResponseEvent $applicationResponseEvent */
 		$applicationResponseEvent = $this->eventStateStorage->getEventState(NetteApplicationEvents::ON_RESPONSE);

@@ -8,17 +8,14 @@
 	],
 	"require": {
 		"php": ">=5.6",
-		"nette/di": "~2.3.0",
-		"nette/http": "~2.3.0",
-		"symfony/event-dispatcher": "~2.7.0"
+		"nette/di": "~2.3",
+		"nette/http": "~2.3",
+		"symfony/event-dispatcher": "~2.7"
 	},
 	"require-dev": {
 		"kdyby/events": "~2.4",
 		"nette/bootstrap": "~2.3",
-		"nette/application": "~2.3",
-		"nette/robot-loader": "~2.3",
-		"tracy/tracy": "~2.3",
-		"latte/latte": "~2.3"
+		"nette/application": "~2.3"
 	},
 	"autoload": {
 		"psr-4": {

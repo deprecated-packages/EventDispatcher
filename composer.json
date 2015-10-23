@@ -15,7 +15,8 @@
 	"require-dev": {
 		"kdyby/events": "~2.4",
 		"nette/bootstrap": "~2.3",
-		"nette/application": "~2.3"
+		"nette/application": "~2.3",
+		"tracy/tracy": "~2.3"
 	},
 	"autoload": {
 		"psr-4": {

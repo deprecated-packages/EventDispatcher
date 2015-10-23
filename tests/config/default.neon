@@ -1,3 +1,7 @@
+application:
+	scanDirs: FALSE
+
+
 services:
 	- Symnedi\EventDispatcher\Tests\NetteEvent\EventStateStorage
 
@@ -11,6 +15,7 @@ services:
 	router: [@Symnedi\EventDispatcher\Tests\NetteEvent\DispatchSource\RouterFactory, create]
 	- HomepagePresenter
 	- ResponsePresenter
+
 
 extensions:
 	- Symnedi\EventDispatcher\DI\EventDispatcherExtension

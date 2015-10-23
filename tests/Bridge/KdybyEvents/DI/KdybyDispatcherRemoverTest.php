@@ -18,9 +18,7 @@ final class KdybyDispatcherRemoverTest extends PHPUnit_Framework_TestCase
 		$containerBuilder = new ContainerBuilder;
 		$this->assertCount(0, $containerBuilder->getDefinitions());
 
-		/**
-		 * code from @see Kdyby\Events\DI\EventsExtension::loadConfiguration()
-		 */
+		/** code from @see Kdyby\Events\DI\EventsExtension::loadConfiguration() */
 		$containerBuilder->addDefinition('kdyby.events.symfonyProxy')
 			->setClass(EventDispatcherInterface::class)
 			->setFactory(SymfonyDispatcher::class);

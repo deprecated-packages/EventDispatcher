@@ -9,8 +9,6 @@
 
 ## Install
 
-Via Composer:
-
 ```sh
 $ composer require symnedi/event-dispatcher
 ```

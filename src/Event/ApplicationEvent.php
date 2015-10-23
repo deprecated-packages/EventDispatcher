@@ -11,7 +11,7 @@ use Nette\Application\Application;
 use Symfony\Component\EventDispatcher\Event;
 
 
-class ApplicationEvent extends Event
+final class ApplicationEvent extends Event
 {
 
 	/**

@@ -11,7 +11,7 @@ use Symnedi\EventDispatcher\NetteApplicationEvents;
 use Symnedi\EventDispatcher\Tests\ContainerFactory;
 
 
-class DispatchApplicationResponseEventTest extends PHPUnit_Framework_TestCase
+final class DispatchApplicationResponseEventTest extends PHPUnit_Framework_TestCase
 {
 
 	/**

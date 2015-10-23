@@ -1,0 +1,7 @@
+application:
+	scanDirs: FALSE
+
+
+extensions:
+	- Kdyby\Events\DI\EventsExtension
+	- Symnedi\EventDispatcher\DI\EventDispatcherExtension

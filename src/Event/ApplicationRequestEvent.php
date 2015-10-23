@@ -12,7 +12,7 @@ use Nette\Application\Request;
 use Symfony\Component\EventDispatcher\Event;
 
 
-class ApplicationRequestEvent extends Event
+final class ApplicationRequestEvent extends Event
 {
 
 	/**

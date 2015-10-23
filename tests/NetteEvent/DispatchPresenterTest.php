@@ -11,7 +11,7 @@ use Symnedi\EventDispatcher\NettePresenterEvents;
 use Symnedi\EventDispatcher\Tests\ContainerFactory;
 
 
-class DispatchPresenterTest extends PHPUnit_Framework_TestCase
+final class DispatchPresenterTest extends PHPUnit_Framework_TestCase
 {
 
 	/**

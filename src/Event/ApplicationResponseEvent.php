@@ -12,7 +12,7 @@ use Nette\Application\IResponse;
 use Symfony\Component\EventDispatcher\Event;
 
 
-class ApplicationResponseEvent extends Event
+final class ApplicationResponseEvent extends Event
 {
 
 	/**

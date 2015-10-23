@@ -11,7 +11,7 @@ use Symnedi\EventDispatcher\DI\EventDispatcherExtension;
 use Symnedi\EventDispatcher\Tests\DI\EventDispatcherExtensionSource\SomeEventSubscriber;
 
 
-class EventDispatcherExtensionTest extends PHPUnit_Framework_TestCase
+final class EventDispatcherExtensionTest extends PHPUnit_Framework_TestCase
 {
 
 	public function testGetEventDispatcher()
@@ -40,7 +40,6 @@ class EventDispatcherExtensionTest extends PHPUnit_Framework_TestCase
 			->setClass(SomeEventSubscriber::class);
 
 		$extension->beforeCompile();
-		$containerBuilder->prepareClassList();
 
 		$eventDispatcherDefinition = $containerBuilder->getDefinition(
 			$containerBuilder->getByType(EventDispatcherInterface::class)
@@ -56,7 +55,7 @@ class EventDispatcherExtensionTest extends PHPUnit_Framework_TestCase
 	private function getExtension()
 	{
 		$extension = new EventDispatcherExtension;
-		$extension->setCompiler(new Compiler(new ContainerBuilder), 'compiler');
+		$extension->setCompiler(new Compiler(new ContainerBuilder), 'events');
 		return $extension;
 	}
 

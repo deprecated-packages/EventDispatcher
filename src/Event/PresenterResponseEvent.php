@@ -13,7 +13,7 @@ use Nette\Application\UI\Presenter;
 use Symfony\Component\EventDispatcher\Event;
 
 
-class PresenterResponseEvent extends Event
+final class PresenterResponseEvent extends Event
 {
 
 	/**

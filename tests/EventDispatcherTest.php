@@ -7,7 +7,7 @@ use PHPUnit_Framework_TestCase;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 
-class EventDispatcherTest extends PHPUnit_Framework_TestCase
+final class EventDispatcherTest extends PHPUnit_Framework_TestCase
 {
 
 	/**

@@ -7,12 +7,11 @@
 
 namespace Symnedi\EventDispatcher\DI;
 
-use Closure;
 use Nette\DI\CompilerExtension;
-use Nette\DI\ContainerBuilder;
 use Nette\DI\Statement;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symnedi\EventDispatcher\Bridge\KdybyEvents\DI\KdybyDispatcherRemover;
 
 
 final class EventDispatcherExtension extends CompilerExtension
@@ -37,7 +36,7 @@ final class EventDispatcherExtension extends CompilerExtension
 		$containerBuilder = $this->getContainerBuilder();
 		$containerBuilder->prepareClassList();
 
-		$this->removeKdybySymfonyProxy();
+		$this->removeKdybyEventsSymfonyDispatcherProxy();
 
 		$eventDispatcher = $containerBuilder->getDefinition(
 			$containerBuilder->getByType(EventDispatcherInterface::class)
@@ -81,31 +80,14 @@ final class EventDispatcherExtension extends CompilerExtension
 	}
 
 
-	private function removeKdybySymfonyProxy()
+	private function removeKdybyEventsSymfonyDispatcherProxy()
 	{
 		$containerBuilder = $this->getContainerBuilder();
-
-		foreach ($containerBuilder->findByType(EventDispatcherInterface::class) as $name => $eventDispatcherDefinition)
-		{
-			if ($eventDispatcherDefinition->getFactory()->getEntity() === 'Kdyby\Events\SymfonyDispatcher') {
-				// @bug workaround of https://github.com/nette/di/pull/71
-				// also remove from definition class reference
-				$classRemover = function (ContainerBuilder $containerBuilder, $name, $class) {
-					if (isset($containerBuilder->classes[$class][TRUE])) {
-						foreach ($containerBuilder->classes[$class][TRUE] as $key => $definitionName) {
-							if ($name === $definitionName) {
-								unset($containerBuilder->classes[$class][TRUE][$key]);
-							}
-						}
-					}
-				};
-				$class = $containerBuilder->getDefinition($name)->getClass();
-				$classRemover = Closure::bind($classRemover, NULL, $containerBuilder);
-				$classRemover($containerBuilder, $name, $class);
-
-				$containerBuilder->removeDefinition($name);
-			}
+		if ( ! $this->compiler->getExtensions('Kdyby\Events\DI\EventsExtension')) {
+			return;
 		}
+
+		(new KdybyDispatcherRemover)->removeFromContainer($containerBuilder);
 	}
 
 }

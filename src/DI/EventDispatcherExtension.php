@@ -15,9 +15,12 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 
-class EventDispatcherExtension extends CompilerExtension
+final class EventDispatcherExtension extends CompilerExtension
 {
 
+	/**
+	 * {@inheritdoc}
+	 */
 	public function loadConfiguration()
 	{
 		$containerBuilder = $this->getContainerBuilder();
@@ -26,6 +29,9 @@ class EventDispatcherExtension extends CompilerExtension
 	}
 
 
+	/**
+	 * {@inheritdoc}
+	 */
 	public function beforeCompile()
 	{
 		$containerBuilder = $this->getContainerBuilder();

@@ -70,7 +70,7 @@ final class NetteApplicationEvents
 	 * The ON_ERROR event when an unhandled exception occurs in the application,
 	 * @see Nette\Application\Application::$onError.
 	 *
- 	 * The event listener method receives a @see Symnedi\EventDispatcher\Event\ApplicationExceptionEvent instance.
+	 * The event listener method receives a @see Symnedi\EventDispatcher\Event\ApplicationExceptionEvent instance.
 	 *
 	 * @var string
 	 */

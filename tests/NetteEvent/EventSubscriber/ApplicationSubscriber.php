@@ -12,7 +12,7 @@ use Symnedi\EventDispatcher\NetteApplicationEvents;
 use Symnedi\EventDispatcher\Tests\NetteEvent\EventStateStorage;
 
 
-class ApplicationSubscriber implements EventSubscriberInterface
+final class ApplicationSubscriber implements EventSubscriberInterface
 {
 
 	/**

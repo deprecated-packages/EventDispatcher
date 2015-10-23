@@ -8,7 +8,7 @@ use Symnedi\EventDispatcher\NettePresenterEvents;
 use Symnedi\EventDispatcher\Tests\NetteEvent\EventStateStorage;
 
 
-class PresenterSubscriber implements EventSubscriberInterface
+final class PresenterSubscriber implements EventSubscriberInterface
 {
 
 	/**

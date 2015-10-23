@@ -6,7 +6,7 @@ use Exception;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 
-class SomeEventSubscriber implements EventSubscriberInterface
+final class SomeEventSubscriber implements EventSubscriberInterface
 {
 
 	/**

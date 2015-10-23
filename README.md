@@ -3,7 +3,7 @@
 [![Build Status](https://img.shields.io/travis/Symnedi/EventDispatcher.svg?style=flat-square)](https://travis-ci.org/Symnedi/EventDispatcher)
 [![Quality Score](https://img.shields.io/scrutinizer/g/Symnedi/EventDispatcher.svg?style=flat-square)](https://scrutinizer-ci.com/g/Symnedi/EventDispatcher)
 [![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/Symnedi/EventDispatcher.svg?style=flat-square)](https://scrutinizer-ci.com/g/Symnedi/EventDispatcher)
-[![Downloads this Month](https://img.shields.io/packagist/dm/symnedi/event-dispatcher.svg?style=flat-square)](https://packagist.org/packages/symnedi/event-dispatcher)
+[![Downloads](https://img.shields.io/packagist/dt/symnedi/event-dispatcher.svg?style=flat-square)](https://packagist.org/packages/symnedi/event-dispatcher)
 [![Latest stable](https://img.shields.io/packagist/v/symnedi/event-dispatcher.svg?style=flat-square)](https://packagist.org/packages/symnedi/event-dispatcher)
 
 

@@ -33,7 +33,9 @@ There are 3 important parts using EventDispatcher:
 - EventDispatcher
 
 *Event* is value object, it simply stores data we use - e.g. user email and password.
+
 *EventSubscriber* listens to certain event and invokes some action, when that happens - when user logs in. 
+
 *EventDispatcher* invokes the event in the place where it happens - in the login form just after the login method.
 
 To see the real code in practise, there is [example section](example) with both Event and EventSubscriber.
@@ -41,8 +43,9 @@ To see the real code in practise, there is [example section](example) with both 
 Also you can find [`AppEvents.php`](example/Event/AppEvents.php) that basically lists all used events. It's not necessary for the starters, just convenient in huge applications.
 
 
-For more details, check [Symfony documentation](http://symfony.com/doc/current/components/event_dispatcher/introduction.html).
-Or [this very nice presentation](http://www.slideshare.net/DigitalPoetsSociety/symfony2-components-the-event-dispatcher) with real-life examples. 
+For more details, check [Symfony documentation](http://symfony.com/doc/current/components/event_dispatcher/introduction.html),
+or [this very nice presentation](http://www.slideshare.net/DigitalPoetsSociety/symfony2-components-the-event-dispatcher) with real-life examples. 
+
 
 ## Testing
 

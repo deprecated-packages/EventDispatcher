@@ -8,10 +8,11 @@
 namespace Symnedi\EventDispatcher\DI;
 
 use Nette\DI\CompilerExtension;
+use Nette\DI\ServiceDefinition;
 use Nette\DI\Statement;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symnedi\EventDispatcher\Bridge\KdybyEvents\DI\KdybyDispatcherRemover;
 
 
 final class EventDispatcherExtension extends CompilerExtension
@@ -22,9 +23,13 @@ final class EventDispatcherExtension extends CompilerExtension
 	 */
 	public function loadConfiguration()
 	{
+		if ($this->isKdybyEventsRegistered()) {
+			return;
+		}
+
 		$containerBuilder = $this->getContainerBuilder();
-		$services = $this->loadFromFile(__DIR__ . '/services.neon');
-		$this->compiler->parseServices($containerBuilder, $services);
+		$containerBuilder->addDefinition($this->prefix('eventDispatcher'))
+			->setClass(EventDispatcher::class);
 	}
 
 
@@ -36,11 +41,12 @@ final class EventDispatcherExtension extends CompilerExtension
 		$containerBuilder = $this->getContainerBuilder();
 		$containerBuilder->prepareClassList();
 
-		$this->removeKdybyEventsSymfonyDispatcherProxy();
+		$eventDispatcher = $this->getDefinitionByType(EventDispatcherInterface::class);
 
-		$eventDispatcher = $containerBuilder->getDefinition(
-			$containerBuilder->getByType(EventDispatcherInterface::class)
-		);
+		if ($this->isKdybyEventsRegistered()) {
+			$eventDispatcher->setClass(EventDispatcher::class)
+				->setFactory(NULL);
+		}
 
 		foreach ($containerBuilder->findByType(EventSubscriberInterface::class) as $eventSubscriberDefinition) {
 			$eventDispatcher->addSetup('addSubscriber', ['@' . $eventSubscriberDefinition->getClass()]);
@@ -80,14 +86,24 @@ final class EventDispatcherExtension extends CompilerExtension
 	}
 
 
-	private function removeKdybyEventsSymfonyDispatcherProxy()
+	/**
+	 * @return bool
+	 */
+	private function isKdybyEventsRegistered()
+	{
+		return (bool) $this->compiler->getExtensions('Kdyby\Events\DI\EventsExtension');
+	}
+
+
+	/**
+	 * @param string $type
+	 * @return ServiceDefinition
+	 */
+	private function getDefinitionByType($type)
 	{
 		$containerBuilder = $this->getContainerBuilder();
-		if ( ! $this->compiler->getExtensions('Kdyby\Events\DI\EventsExtension')) {
-			return;
-		}
-
-		(new KdybyDispatcherRemover)->removeFromContainer($containerBuilder);
+		$definitionName = $containerBuilder->getByType($type);
+		return $containerBuilder->getDefinition($definitionName);
 	}
 
 }

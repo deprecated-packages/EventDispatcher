@@ -5,4 +5,5 @@ application:
 
 extensions:
 	- Kdyby\Events\DI\EventsExtension
+	- Kdyby\Console\DI\ConsoleExtension
 	- Symnedi\EventDispatcher\DI\EventDispatcherExtension

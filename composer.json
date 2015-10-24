@@ -13,6 +13,7 @@
 		"symfony/event-dispatcher": "~2.7"
 	},
 	"require-dev": {
+		"kdyby/console": "~2.4",
 		"kdyby/events": "~2.4",
 		"nette/bootstrap": "~2.3",
 		"nette/application": "~2.3",

@@ -13,6 +13,7 @@ use Nette\DI\Statement;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symnedi\EventDispatcher\Contract\DI\NetteEventItemInterface;
 
 
 final class EventDispatcherExtension extends CompilerExtension
@@ -48,11 +49,41 @@ final class EventDispatcherExtension extends CompilerExtension
 				->setFactory(NULL);
 		}
 
+
+		$this->addSubscribersToEventDispatcher();
+		$this->bindNetteEvents();
+	}
+
+
+	/**
+	 * @return bool
+	 */
+	private function isKdybyEventsRegistered()
+	{
+		return (bool) $this->compiler->getExtensions('Kdyby\Events\DI\EventsExtension');
+	}
+
+
+	private function addSubscribersToEventDispatcher()
+	{
+		$containerBuilder = $this->getContainerBuilder();
+		$eventDispatcher = $this->getDefinitionByType(EventDispatcherInterface::class);
+
 		foreach ($containerBuilder->findByType(EventSubscriberInterface::class) as $eventSubscriberDefinition) {
 			$eventDispatcher->addSetup('addSubscriber', ['@' . $eventSubscriberDefinition->getClass()]);
 		}
+	}
 
-		$this->bindNetteEvents();
+
+	/**
+	 * @param string $type
+	 * @return ServiceDefinition
+	 */
+	private function getDefinitionByType($type)
+	{
+		$containerBuilder = $this->getContainerBuilder();
+		$definitionName = $containerBuilder->getByType($type);
+		return $containerBuilder->getDefinition($definitionName);
 	}
 
 
@@ -67,43 +98,21 @@ final class EventDispatcherExtension extends CompilerExtension
 			}
 
 			foreach ($serviceDefinitions as $serviceDefinition) {
-				$serviceDefinition->addSetup('$service->?[] = ?;', [
-					$netteEvent->getProperty(),
-					new Statement('
-					function () {
-						$class = ?;
-						$event = new $class(...func_get_args());
-						?->dispatch(?, $event);
-					}', [
-							$netteEvent->getEventClass(),
-							'@' . EventDispatcherInterface::class,
-							$netteEvent->getEventName()
-						]
-					)
-				]);
+				$this->decorateServiceDefinitionWithNetteEvent($serviceDefinition, $netteEvent);
 			}
 		}
 	}
 
 
-	/**
-	 * @return bool
-	 */
-	private function isKdybyEventsRegistered()
+	private function decorateServiceDefinitionWithNetteEvent(ServiceDefinition $serviceDefinition, NetteEventItemInterface $netteEvent)
 	{
-		return (bool) $this->compiler->getExtensions('Kdyby\Events\DI\EventsExtension');
-	}
+		$propertyStatement = new Statement('function () {
+			$class = ?;
+			$event = new $class(...func_get_args());
+			?->dispatch(?, $event);
+		}', [$netteEvent->getEventClass(), '@' . EventDispatcherInterface::class, $netteEvent->getEventName()]);
 
-
-	/**
-	 * @param string $type
-	 * @return ServiceDefinition
-	 */
-	private function getDefinitionByType($type)
-	{
-		$containerBuilder = $this->getContainerBuilder();
-		$definitionName = $containerBuilder->getByType($type);
-		return $containerBuilder->getDefinition($definitionName);
+		$serviceDefinition->addSetup('$service->?[] = ?;', [$netteEvent->getProperty(), $propertyStatement]);
 	}
 
 }

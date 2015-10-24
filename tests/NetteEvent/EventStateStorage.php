@@ -2,7 +2,7 @@
 
 namespace Symnedi\EventDispatcher\Tests\NetteEvent;
 
-use Symnedi\EventDispatcher\Event\AbstractEvent;
+use Symfony\Component\EventDispatcher\Event;
 
 
 class EventStateStorage
@@ -16,9 +16,9 @@ class EventStateStorage
 
 	/**
 	 * @param string $event
-	 * @param AbstractEvent $state
+	 * @param Event $state
 	 */
-	public function addEventState($event, AbstractEvent $state)
+	public function addEventState($event, Event $state)
 	{
 		$this->storage[$event] = $state;
 	}
@@ -26,7 +26,7 @@ class EventStateStorage
 
 	/**
 	 * @param string $event
-	 * @return AbstractEvent
+	 * @return Event
 	 */
 	public function getEventState($event)
 	{

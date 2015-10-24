@@ -39,7 +39,7 @@ final class NetteEventListFactory implements NetteEventListFactoryInterface
 	 * @param NetteEventItem[] $list
 	 * @return NetteEventItem[]
 	 */
-	private function addApplicationEventItems($list)
+	private function addApplicationEventItems(array $list)
 	{
 		$list[] = new NetteEventItem(
 			Application::class, 'onRequest', ApplicationRequestEvent::class, NetteApplicationEvents::ON_REQUEST
@@ -67,7 +67,7 @@ final class NetteEventListFactory implements NetteEventListFactoryInterface
 	 * @param NetteEventItem[] $list
 	 * @return NetteEventItem[]
 	 */
-	private function addPresenterEventItems($list)
+	private function addPresenterEventItems(array $list)
 	{
 		$list[] = new NetteEventItem(
 			Presenter::class, 'onShutdown', PresenterResponseEvent::class, NettePresenterEvents::ON_SHUTDOWN

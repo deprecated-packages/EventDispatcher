@@ -2,6 +2,8 @@
 
 namespace Symnedi\EventDispatcher\Tests\NetteEvent;
 
+use Symnedi\EventDispatcher\Event\AbstractEvent;
+
 
 class EventStateStorage
 {
@@ -14,9 +16,9 @@ class EventStateStorage
 
 	/**
 	 * @param string $event
-	 * @param string $state
+	 * @param AbstractEvent $state
 	 */
-	public function addEventState($event, $state)
+	public function addEventState($event, AbstractEvent $state)
 	{
 		$this->storage[$event] = $state;
 	}
@@ -24,7 +26,7 @@ class EventStateStorage
 
 	/**
 	 * @param string $event
-	 * @return string
+	 * @return AbstractEvent
 	 */
 	public function getEventState($event)
 	{

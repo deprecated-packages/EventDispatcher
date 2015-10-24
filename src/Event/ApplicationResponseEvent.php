@@ -9,10 +9,9 @@ namespace Symnedi\EventDispatcher\Event;
 
 use Nette\Application\Application;
 use Nette\Application\IResponse;
-use Symfony\Component\EventDispatcher\Event;
 
 
-final class ApplicationResponseEvent extends Event
+final class ApplicationResponseEvent extends AbstractEvent
 {
 
 	/**

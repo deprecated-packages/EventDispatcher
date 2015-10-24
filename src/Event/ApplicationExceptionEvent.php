@@ -9,10 +9,9 @@ namespace Symnedi\EventDispatcher\Event;
 
 use Exception;
 use Nette\Application\Application;
-use Symfony\Component\EventDispatcher\Event;
 
 
-final class ApplicationExceptionEvent extends Event
+final class ApplicationExceptionEvent extends AbstractEvent
 {
 
 	/**

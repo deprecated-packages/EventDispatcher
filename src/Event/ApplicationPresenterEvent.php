@@ -10,10 +10,9 @@ namespace Symnedi\EventDispatcher\Event;
 use Nette\Application\Application;
 use Nette\Application\IPresenter;
 use Nette\Application\UI\Presenter;
-use Symfony\Component\EventDispatcher\Event;
 
 
-final class ApplicationPresenterEvent extends Event
+final class ApplicationPresenterEvent extends AbstractEvent
 {
 
 	/**

@@ -49,7 +49,6 @@ final class EventDispatcherExtension extends CompilerExtension
 				->setFactory(NULL);
 		}
 
-
 		$this->addSubscribersToEventDispatcher();
 		$this->bindNetteEvents();
 	}
@@ -104,8 +103,10 @@ final class EventDispatcherExtension extends CompilerExtension
 	}
 
 
-	private function decorateServiceDefinitionWithNetteEvent(ServiceDefinition $serviceDefinition, NetteEventItemInterface $netteEvent)
-	{
+	private function decorateServiceDefinitionWithNetteEvent(
+		ServiceDefinition $serviceDefinition,
+		NetteEventItemInterface $netteEvent
+	) {
 		$propertyStatement = new Statement('function () {
 			$class = ?;
 			$event = new $class(...func_get_args());

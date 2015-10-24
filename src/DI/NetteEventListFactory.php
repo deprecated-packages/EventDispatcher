@@ -9,6 +9,7 @@ namespace Symnedi\EventDispatcher\DI;
 
 use Nette\Application\Application;
 use Nette\Application\UI\Presenter;
+use Symnedi\EventDispatcher\Contract\DI\NetteEventListFactoryInterface;
 use Symnedi\EventDispatcher\Event\ApplicationEvent;
 use Symnedi\EventDispatcher\Event\ApplicationExceptionEvent;
 use Symnedi\EventDispatcher\Event\ApplicationPresenterEvent;
@@ -19,11 +20,11 @@ use Symnedi\EventDispatcher\NetteApplicationEvents;
 use Symnedi\EventDispatcher\NettePresenterEvents;
 
 
-class NetteEventListFactory
+final class NetteEventListFactory implements NetteEventListFactoryInterface
 {
 
 	/**
-	 * @return NetteEventItem[]
+	 * {@inheritdoc}
 	 */
 	public function create()
 	{

@@ -7,8 +7,10 @@
 
 namespace Symnedi\EventDispatcher\DI;
 
+use Symnedi\EventDispatcher\Contract\DI\NetteEventItemInterface;
 
-class NetteEventItem
+
+final class NetteEventItem implements NetteEventItemInterface
 {
 
 	/**
@@ -48,7 +50,7 @@ class NetteEventItem
 
 
 	/**
-	 * @return string
+	 * {@inheritdoc}
 	 */
 	public function getClass()
 	{
@@ -57,7 +59,7 @@ class NetteEventItem
 
 
 	/**
-	 * @return string
+	 * {@inheritdoc}
 	 */
 	public function getEventClass()
 	{
@@ -66,7 +68,7 @@ class NetteEventItem
 
 
 	/**
-	 * @return string
+	 * {@inheritdoc}
 	 */
 	public function getEventName()
 	{
@@ -75,7 +77,7 @@ class NetteEventItem
 
 
 	/**
-	 * @return string
+	 * {@inheritdoc}
 	 */
 	public function getProperty()
 	{

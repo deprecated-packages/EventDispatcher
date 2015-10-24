@@ -1,6 +1,8 @@
 application:
 	scanDirs: FALSE
 	scanComposer: FALSE
+	mapping:
+		*: Symnedi\EventDispatcher\Tests\NetteEvent\DispatchSource\*Presenter
 
 
 services:
@@ -14,8 +16,9 @@ services:
 	# routing logic
 	- Symnedi\EventDispatcher\Tests\NetteEvent\DispatchSource\RouterFactory
 	router: [@Symnedi\EventDispatcher\Tests\NetteEvent\DispatchSource\RouterFactory, create]
-	- HomepagePresenter
-	- ResponsePresenter
+
+	- Symnedi\EventDispatcher\Tests\NetteEvent\DispatchSource\HomepagePresenter
+	- Symnedi\EventDispatcher\Tests\NetteEvent\DispatchSource\ResponsePresenter
 
 
 extensions:

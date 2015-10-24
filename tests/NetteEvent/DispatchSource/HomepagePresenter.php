@@ -1,10 +1,11 @@
 <?php
 
-use Nette\Application\Responses\TextResponse;
+namespace Symnedi\EventDispatcher\Tests\NetteEvent\DispatchSource;
+
 use Nette\Application\UI\Presenter;
 
 
-class HomepagePresenter extends Presenter
+final class HomepagePresenter extends Presenter
 {
 
 	public function actionDefault()

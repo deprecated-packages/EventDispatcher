@@ -1,10 +1,12 @@
 <?php
 
+namespace Symnedi\EventDispatcher\Tests\NetteEvent\DispatchSource;
+
 use Nette\Application\Responses\TextResponse;
 use Nette\Application\UI\Presenter;
 
 
-class ResponsePresenter extends Presenter
+final class ResponsePresenter extends Presenter
 {
 
 	protected function startup()

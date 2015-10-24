@@ -27,10 +27,6 @@
 	"autoload-dev": {
 		"psr-4": {
 			"Symnedi\\EventDispatcher\\Tests\\": "tests"
-		},
-		"classmap": [
-			"tests/NetteEvent/DispatchSource/HomepagePresenter.php",
-			"tests/NetteEvent/DispatchSource/ResponsePresenter.php"
-		]
+		}
 	}
 }

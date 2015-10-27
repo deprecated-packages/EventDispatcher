@@ -51,6 +51,7 @@ final class EventDispatcherExtension extends CompilerExtension
 
 		$this->addSubscribersToEventDispatcher();
 		$this->bindNetteEvents();
+		$this->bindEventDispatcherToSymfonyConsole();
 	}
 
 
@@ -114,6 +115,16 @@ final class EventDispatcherExtension extends CompilerExtension
 		}', [$netteEvent->getEventClass(), '@' . EventDispatcherInterface::class, $netteEvent->getEventName()]);
 
 		$serviceDefinition->addSetup('$service->?[] = ?;', [$netteEvent->getProperty(), $propertyStatement]);
+	}
+
+
+	private function bindEventDispatcherToSymfonyConsole()
+	{
+		$containerBuilder = $this->getContainerBuilder();
+		if ($consoleApplicationName = $containerBuilder->getByType('Symfony\Component\Console\Application')) {
+			$consoleApplicationDefinition = $containerBuilder->getDefinition($consoleApplicationName);
+			$consoleApplicationDefinition->addSetup('setDispatcher');
+		}
 	}
 
 }

@@ -39,9 +39,6 @@ final class EventDispatcherExtension extends CompilerExtension
 	 */
 	public function beforeCompile()
 	{
-		$containerBuilder = $this->getContainerBuilder();
-		$containerBuilder->prepareClassList();
-
 		$eventDispatcher = $this->getDefinitionByType(EventDispatcherInterface::class);
 
 		if ($this->isKdybyEventsRegistered()) {

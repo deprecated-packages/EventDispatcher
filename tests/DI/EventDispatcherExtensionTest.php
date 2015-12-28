@@ -20,6 +20,9 @@ final class EventDispatcherExtensionTest extends PHPUnit_Framework_TestCase
 		$extension->loadConfiguration();
 
 		$containerBuilder = $extension->getContainerBuilder();
+
+		// Emulates life cycle from Nette\DI\Compiler.
+		// @link https://github.com/nette/di/blob/9b0f8150f823ca22813ba9871156dabb20a911fa/src/DI/Compiler.php#L202-L207
 		$containerBuilder->prepareClassList();
 
 		$eventDispatcherDefinition = $containerBuilder->getDefinition(
@@ -38,6 +41,10 @@ final class EventDispatcherExtensionTest extends PHPUnit_Framework_TestCase
 
 		$containerBuilder->addDefinition('eventSubscriber')
 			->setClass(SomeEventSubscriber::class);
+
+		// Emulates life cycle from Nette\DI\Compiler.
+		// @link https://github.com/nette/di/blob/9b0f8150f823ca22813ba9871156dabb20a911fa/src/DI/Compiler.php#L202-L207
+		$containerBuilder->prepareClassList();
 
 		$extension->beforeCompile();
 

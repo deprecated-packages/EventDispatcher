@@ -60,7 +60,7 @@ final class NetteApplicationEvents
 	 * The ON_RESPONSE event occurs when a new response is ready for dispatch,
 	 * @see Nette\Application\Application::$onResponse.
 	 *
-	 * The event listener method receives a @see Symnedi\EventDispatcher\Event\ApplicationExceptionEvent instance.
+	 * The event listener method receives a @see Symnedi\EventDispatcher\Event\ApplicationResponseEvent instance.
 	 *
 	 * @var string
 	 */

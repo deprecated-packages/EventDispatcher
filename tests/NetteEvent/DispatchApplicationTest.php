@@ -76,7 +76,7 @@ final class DispatchApplicationTest extends PHPUnit_Framework_TestCase
 		/** @var ApplicationExceptionEvent $applicationExceptionEvent */
 		$applicationExceptionEvent = $this->eventStateStorage->getEventState(NetteApplicationEvents::ON_SHUTDOWN);
 		$this->assertInstanceOf(Application::class, $applicationExceptionEvent->getApplication());
-		$this->assertNull($applicationExceptionEvent->getException());
+		$this->assertNull($applicationExceptionEvent->getThrowable());
 	}
 
 }

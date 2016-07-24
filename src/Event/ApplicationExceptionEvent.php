@@ -7,7 +7,6 @@
 
 namespace Symnedi\EventDispatcher\Event;
 
-use Exception;
 use Nette\Application\Application;
 use Symfony\Component\EventDispatcher\Event;
 
@@ -21,12 +20,16 @@ final class ApplicationExceptionEvent extends Event
 	private $application;
 
 	/**
-	 * @var Exception
+	 * @var \Throwable|\Exception|NULL
 	 */
 	private $exception;
 
 
-	public function __construct(Application $application, Exception $exception = NULL)
+	/**
+	 * @param Application $application
+	 * @param \Throwable|\Exception|NULL $exception
+	 */
+	public function __construct(Application $application, $exception = NULL)
 	{
 		$this->application = $application;
 		$this->exception = $exception;
@@ -43,7 +46,7 @@ final class ApplicationExceptionEvent extends Event
 
 
 	/**
-	 * @return Exception
+	 * @return \Throwable|\Exception|NULL
 	 */
 	public function getException()
 	{

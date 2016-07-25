@@ -5,6 +5,7 @@ namespace Symnedi\EventDispatcher\Tests\NetteEvent;
 use Nette\Application\Application;
 use Nette\Application\IResponse;
 use Nette\Application\Request;
+use Nette\Application\UI\Component;
 use PHPUnit_Framework_TestCase;
 use Symnedi\EventDispatcher\Event\ApplicationResponseEvent;
 use Symnedi\EventDispatcher\NetteApplicationEvents;
@@ -40,7 +41,8 @@ final class DispatchApplicationResponseEventTest extends PHPUnit_Framework_TestC
 		$requestMock = $this->prophesize(Request::class);
 		$requestMock->getPresenterName()->willReturn('Response');
 		$requestMock->getParameters()->willReturn([]);
-		$requestMock->getPost('do')->willReturn(NULL);
+		$prefix = class_exists(Component::class) ? '_' : '';
+		$requestMock->getPost($prefix . 'do')->willReturn(NULL);
 		$requestMock->isMethod()->willReturn(TRUE);
 		$this->application->processRequest($requestMock->reveal());
 
